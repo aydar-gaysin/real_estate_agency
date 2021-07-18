@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Flat
+from .models import Flat, Complaint
 
 
 class FlatAdmin(admin.ModelAdmin):
@@ -12,4 +12,12 @@ class FlatAdmin(admin.ModelAdmin):
     list_filter = ['new_building', 'rooms_number', 'has_balcony']
 
 
+class CompaintAdmin(admin.ModelAdmin):
+    raw_id_fields = [
+        'user', 'flat']
+    list_display = ('user', 'flat', 'complaint_text')
+    list_editable = ['complaint_text']
+
+
 admin.site.register(Flat, FlatAdmin)
+admin.site.register(Complaint, CompaintAdmin)
